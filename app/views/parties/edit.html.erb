@@ -1,0 +1,18 @@
+<h1>Edit Party</h1>
+
+<%= form_with(model: @party, local: true) do |form| %>
+  <p>
+    <%= form.label :title %><br>
+    <%= form.text_field :title %>
+  </p>
+  <p>
+    <%= form.label :date_time, "Date & Time" %><br>
+    <%= form.datetime_select :date_time %>
+  </p>
+  <p>
+    <%= form.label :description %><br>
+    <%= form.text_area :description %>
+  </p>
+  <%= form.submit "Update Party", class: "px-4 py-2 bg-green-600 text-white rounded" %>
+  <%= link_to "Cancel", party_path(@party), class: "px-4 py-2 bg-gray-200 rounded" %>
+<% end %>

@@ -1,0 +1,33 @@
+<h1><%= @party.title %></h1>
+<p><strong>Date & Time:</strong> <%= @party.date_time.strftime("%B %d, %Y %I:%M %p") %></p>
+<p><strong>Description:</strong> <%= @party.description.presence || "No description" %></p>
+
+<hr>
+
+<h2>Attendees</h2>
+<ul>
+  <% @party.attendees.each do |attendee| %>
+    <% next unless attendee.persisted? %>
+    <li>
+      <%= attendee.full_name %> - <%= attendee.email %> - <%= attendee.phone %>
+      <%= link_to "Remove", party_attendee_path(@party, attendee), method: :delete, data: { confirm: "Remove this attendee?" }, class: "text-red-500" %>
+    </li>
+  <% end %>
+</ul>
+
+<h3>Add an Attendee</h3>
+<%= form_with(model: [@party, @attendee], local: true) do |form| %>
+  <p>
+    <%= form.label :full_name %><br>
+    <%= form.text_field :full_name %>
+  </p>
+  <p>
+    <%= form.label :email %><br>
+    <%= form.email_field :email %>
+  </p>
+  <p>
+    <%= form.label :phone %><br>
+    <%= form.telephone_field :phone %>
+  </p>
+  <%= form.submit "Add Attendee", class: "px-3 py-1 bg-green-500 text-white rounded" %>
+<% end %>
