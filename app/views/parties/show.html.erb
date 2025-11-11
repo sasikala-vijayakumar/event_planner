@@ -32,27 +32,54 @@
   </div>
 
   <hr class="border-gray-300">
+  
+  <% if flash[:alert] %>
+    <div id="error-alert" class="bg-red-100 border border-red-400 text-red-700 px-4 py-3 rounded relative mb-4" role="alert">
+      <strong class="font-bold">Failed to add attendee:</strong>
+      <span class="block sm:inline"><%= flash[:alert] %></span>
+      <span class="absolute top-0 bottom-0 right-0 px-4 py-3">
+        <button onclick="this.parentElement.parentElement.remove();" class="text-red-700 font-bold">&times;</button>
+      </span>
+    </div>
+  <% end %>
 
   <!-- Add Attendee Form -->
   <div class="space-y-4">
     <h3 class="text-xl font-semibold text-gray-800">Add an Attendee</h3>
     <%= form_with(model: [@party, @attendee], local: true, class: "space-y-4") do |form| %>
-      <div>
-        <%= form.label :full_name, class: "block text-gray-700 font-medium mb-1" %>
-        <%= form.text_field :full_name, class: "w-full px-4 py-2 border rounded-md focus:outline-none focus:ring-2 focus:ring-blue-400 transition" %>
-      </div>
-      <div>
-        <%= form.label :email, class: "block text-gray-700 font-medium mb-1" %>
-        <%= form.email_field :email, class: "w-full px-4 py-2 border rounded-md focus:outline-none focus:ring-2 focus:ring-blue-400 transition" %>
-      </div>
-      <div>
-        <%= form.label :phone, class: "block text-gray-700 font-medium mb-1" %>
-        <%= form.telephone_field :phone, class: "w-full px-4 py-2 border rounded-md focus:outline-none focus:ring-2 focus:ring-blue-400 transition" %>
-      </div>
-      <div class="mt-2">
-        <%= form.submit "Add Attendee", class: "px-6 py-2 bg-green-500 hover:bg-green-600 text-white rounded-md font-medium transition shadow-md hover:shadow-lg" %>
+
+    <% if @attendee.errors.any? %>
+      <div class="bg-red-100 text-red-700 p-4 rounded-lg mb-4">
+        <h4 class="font-semibold mb-2">Please fix the following errors:</h4>
+        <ul class="list-disc list-inside">
+          <% @attendee.errors.full_messages.each do |msg| %>
+            <li><%= msg %></li>
+          <% end %>
+        </ul>
       </div>
     <% end %>
+
+    <div>
+      <%= form.label :full_name, class: "block text-gray-700 font-medium mb-1" %>
+      <%= form.text_field :full_name, class: "w-full px-4 py-2 border rounded-md focus:outline-none focus:ring-2 focus:ring-blue-400 transition", required: true %>
+    </div>
+    
+    <div>
+      <%= form.label :email, class: "block text-gray-700 font-medium mb-1" %>
+      <%= form.email_field :email, class: "w-full px-4 py-2 border rounded-md focus:outline-none focus:ring-2 focus:ring-blue-400 transition", required: true %>
+    </div>
+    
+    <div>
+      <%= form.label :phone, class: "block text-gray-700 font-medium mb-1" %>
+      <%= form.telephone_field :phone, class: "w-full px-4 py-2 border rounded-md focus:outline-none focus:ring-2 focus:ring-blue-400 transition", required: true %>
+    </div>
+    
+    <div class="mt-2">
+      <%= form.submit "Add Attendee", class: "px-6 py-2 bg-green-500 hover:bg-green-600 text-white rounded-md font-medium transition shadow-md hover:shadow-lg" %>
+    </div>
+
+  <% end %>
+
   </div>
 
 </div>

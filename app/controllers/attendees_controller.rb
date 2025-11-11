@@ -2,18 +2,15 @@ class AttendeesController < ApplicationController
   before_action :set_party
 
   def create
-    @attendee = @party.attendees.build(attendee_params)
+    @attendee = @party.attendees.new(attendee_params)
+
     if @attendee.save
       redirect_to @party, notice: "Attendee added successfully!"
     else
-      redirect_to @party, alert: "Failed to add attendee."
+      # Collect error messages
+      flash.now[:alert] = @attendee.errors.full_messages.join(", ")
+      render "parties/show", status: :unprocessable_entity
     end
-  end
-
-  def destroy
-    @attendee = @party.attendees.find(params[:id])
-    @attendee.destroy
-    redirect_to @party, notice: "Attendee removed successfully!"
   end
 
   private
