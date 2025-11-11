@@ -26,6 +26,17 @@
             <span class="text-gray-600"><%= attendee.email %></span> - 
             <span class="text-gray-600"><%= attendee.phone %></span>
           </div>
+
+          <!-- Remove attendee button -->
+          <div>
+            <%= button_to "×",
+                          party_attendee_path(@party, attendee),
+                          method: :delete,
+                          data: { turbo_confirm: "Remove #{attendee.full_name} from this party?", confirm: "Remove #{attendee.full_name} from this party?" },
+                          form: { class: "ml-0" },
+                          class: "inline-flex items-center justify-center w-8 h-8 rounded-full bg-red-100 text-red-600 hover:bg-red-200 transition border-0",
+                          aria: { label: "Remove attendee" } %>
+          </div>
         </li>
       <% end %>
     </ul>
