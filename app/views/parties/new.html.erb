@@ -1,27 +1,32 @@
-<div class="max-w-lg mx-auto mt-10">
-  <div class="bg-white shadow-lg rounded-xl p-8">
-    <h1 class="text-2xl font-bold text-gray-800 mb-6">Create a New Party</h1>
+<div class="max-w-lg mx-auto mt-12">
+  <div class="bg-white shadow-xl rounded-2xl p-8">
+    <!-- Heading -->
+    <h1 class="text-3xl font-bold text-gray-800 mb-8 text-center">Create a New Party</h1>
 
-    <%= form_with model: @party, local: true, class: "space-y-5" do |form| %>
+    <%= form_with model: @party, local: true, class: "space-y-6" do |form| %>
 
+      <!-- Party Title -->
       <div>
-        <%= form.label :title, "Party Title", class: "block mb-1 font-medium text-gray-700" %>
-        <%= form.text_field :title, class: "w-full border-gray-300 focus:ring-blue-500 focus:border-blue-500 rounded-lg" %>
+        <%= form.label :title, "Party Title", class: "block mb-2 font-semibold text-gray-700" %>
+        <%= form.text_field :title, class: "w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500 transition" %>
       </div>
 
+      <!-- Date & Time -->
       <div>
-        <%= form.label :date_time, "Date & Time", class: "block mb-1 font-medium text-gray-700" %>
-        <%= form.datetime_local_field :date_time, class: "w-full border-gray-300 focus:ring-blue-500 focus:border-blue-500 rounded-lg" %>
+        <%= form.label :date_time, "Date & Time", class: "block mb-2 font-semibold text-gray-700" %>
+        <%= form.datetime_local_field :date_time, class: "w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500 transition" %>
       </div>
 
+      <!-- Description -->
       <div>
-        <%= form.label :description, "Description (Optional)", class: "block mb-1 font-medium text-gray-700" %>
-        <%= form.text_area :description, rows: 3, class: "w-full border-gray-300 focus:ring-blue-500 focus:border-blue-500 rounded-lg" %>
+        <%= form.label :description, "Description (Optional)", class: "block mb-2 font-semibold text-gray-700" %>
+        <%= form.text_area :description, rows: 4, class: "w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500 transition" %>
       </div>
 
-      <div class="flex justify-end gap-3">
-        <%= link_to "Cancel", parties_path, class: "px-4 py-2 bg-gray-200 hover:bg-gray-300 rounded-lg" %>
-        <%= form.submit "Create Party", class: "px-4 py-2 bg-blue-600 text-white hover:bg-blue-700 rounded-lg" %>
+      <!-- Buttons -->
+      <div class="flex justify-end gap-4 mt-4">
+        <%= link_to "Cancel", parties_path, class: "px-5 py-2 bg-gray-200 hover:bg-gray-300 text-gray-800 rounded-lg font-medium transition" %>
+        <%= form.submit "Create Party", class: "px-5 py-2 bg-blue-600 hover:bg-blue-700 text-white rounded-lg font-medium transition shadow-md hover:shadow-lg" %>
       </div>
 
     <% end %>
