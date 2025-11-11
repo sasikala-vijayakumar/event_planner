@@ -1,34 +1,40 @@
-<h1 class="text-3xl font-bold mb-6 text-gray-800">All Parties</h1>
+<div class="max-w-4xl mx-auto px-4">
+  <!-- Centered Title -->
+  <h1 class="text-3xl font-bold mb-6 text-gray-800 text-center">All Parties</h1>
 
-<div class="overflow-x-auto">
-  <table class="table-auto w-full border-collapse shadow-lg">
-    <thead class="bg-gray-200">
-      <tr>
-        <th class="px-6 py-3 text-left text-gray-700 uppercase tracking-wider">Title</th>
-        <th class="px-6 py-3 text-left text-gray-700 uppercase tracking-wider">Date & Time</th>
-        <th class="px-6 py-3 text-left text-gray-700 uppercase tracking-wider">Actions</th>
-      </tr>
-    </thead>
-    <tbody>
-      <% @parties.each_with_index do |party, index| %>
-        <tr class="<%= index.even? ? 'bg-white' : 'bg-gray-50' %> hover:bg-gray-100 transition-colors duration-200">
-          <td class="px-6 py-4 text-gray-800 font-medium"><%= party.title %></td>
-          <td class="px-6 py-4 text-gray-600"><%= party.date_time.strftime("%B %d, %Y %I:%M %p") %></td>
-          <td class="px-6 py-4 flex gap-2">
-            <%= link_to "View", party_path(party), class: "px-4 py-2 bg-blue-500 hover:bg-blue-600 text-white rounded transition" %>
-            <%= link_to "Edit", edit_party_path(party), class: "px-4 py-2 bg-green-500 hover:bg-green-600 text-white rounded transition" %>
-          </td>
+  <!-- Table -->
+  <div class="overflow-x-auto">
+    <table class="table-auto w-full border-collapse shadow-lg">
+      <thead class="bg-gray-200">
+        <tr>
+          <th class="px-6 py-3 text-left text-gray-700 uppercase tracking-wider">Title</th>
+          <th class="px-6 py-3 text-left text-gray-700 uppercase tracking-wider">Date & Time</th>
+          <th class="px-6 py-3 text-left text-gray-700 uppercase tracking-wider">Actions</th>
         </tr>
-      <% end %>
-    </tbody>
-  </table>
-</div>
+      </thead>
+      <tbody>
+        <% @parties.each_with_index do |party, index| %>
+          <tr class="<%= index.even? ? 'bg-white' : 'bg-gray-50' %> hover:bg-gray-100 transition-colors duration-200">
+            <td class="px-6 py-4 text-gray-800 font-medium"><%= party.title %></td>
+            <td class="px-6 py-4 text-gray-600"><%= party.date_time.strftime("%B %d, %Y %I:%M %p") %></td>
+            <td class="px-6 py-4 flex gap-2">
+              <%= link_to "View", party_path(party), class: "px-4 py-2 bg-blue-500 hover:bg-blue-600 text-white rounded transition" %>
+              <%= link_to "Edit", edit_party_path(party), class: "px-4 py-2 bg-green-500 hover:bg-green-600 text-white rounded transition" %>
+            </td>
+          </tr>
+        <% end %>
+      </tbody>
+    </table>
+  </div>
 
-<div class="mt-6 flex justify-between items-center">
-  <%= link_to "New Party", new_party_path, class: "inline-block px-6 py-3 bg-gray-700 hover:bg-gray-800 text-white rounded font-medium transition" %>
+  <!-- Bottom Actions & Pagination -->
+  <div class="mt-6 flex justify-between items-center w-full">
+    <%= link_to "New Party", new_party_path, class: "inline-block px-6 py-3 bg-gray-700 hover:bg-gray-800 text-white rounded font-medium transition" %>
 
-  <div class="pagination">
-    <%= paginate @parties %>
+    <!-- Pagination aligned to the right -->
+    <div class="pagination">
+      <%= paginate @parties %>
+    </div>
   </div>
 </div>
 
