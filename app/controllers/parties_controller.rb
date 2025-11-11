@@ -2,7 +2,7 @@ class PartiesController < ApplicationController
   before_action :set_party, only: [:show, :edit, :update, :destroy]
 
   def index
-    @parties = Party.all
+    @parties = Party.order(:date_time).page(params[:page]).per(5)
   end
 
   def show
