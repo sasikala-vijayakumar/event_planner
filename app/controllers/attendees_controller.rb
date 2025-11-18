@@ -1,6 +1,6 @@
 class AttendeesController < ApplicationController
   before_action :set_party
-  before_action :set_attendee, only: [:destroy]
+  before_action :set_attendee, only: [ :destroy ]
 
   def create
     @attendee = @party.attendees.new(attendee_params)

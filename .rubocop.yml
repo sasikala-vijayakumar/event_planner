@@ -2,7 +2,19 @@
 inherit_gem: { rubocop-rails-omakase: rubocop.yml }
 
 # Overwrite or add rules to create your own house style
-#
-# # Use `[a, [b, c]]` not `[ a, [ b, c ] ]`
+# Exclude files and directories that are generated or vendored so that
+# style checks focus on the application source.
+AllCops:
+  Exclude:
+    - 'db/schema.rb'
+    - 'db/**'
+    - 'app/assets/builds/**'
+    - 'tmp/**'
+    - 'log/**'
+    - 'vendor/**'
+    - 'public/**'
+    - 'storage/**'
+
+# Uncomment and tweak cops below to customize the style for this project.
 # Layout/SpaceInsideArrayLiteralBrackets:
 #   Enabled: false

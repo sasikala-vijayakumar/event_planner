@@ -3,5 +3,4 @@ class Party < ApplicationRecord
 
   validates :title, presence: true
   validates :date_time, presence: true
-
 end
